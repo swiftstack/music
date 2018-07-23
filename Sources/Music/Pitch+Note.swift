@@ -47,45 +47,74 @@ extension Pitch {
 }
 
 public enum SemitoneRepresentation {
-    case sharp
-    case flat
-
+    case sharp, flat
     public static let `default`: SemitoneRepresentation = .sharp
 }
 
 extension Note.Pitch {
-    init(
+    public init(
         from pitch: Pitch,
         semitoneRepresentation: SemitoneRepresentation = .default)
     {
-        let octave = pitch.number.value / 12 - 1
-        var number = pitch.number.value % 12
-        var accidental: Note.Accidental = .natural
+        let letter = Note.Letter(
+            for: pitch.number,
+            semitoneRepresentation: semitoneRepresentation)
 
-        switch number {
-        // flats
-        case 1,3,6,8,10:
-            switch semitoneRepresentation {
-            case .sharp:
-                number -= 1
-                accidental = .sharp
-            case .flat:
-                number += 1
-                accidental = .flat
-            }
-        default: break
-        }
+        let accidental =  Note.Accidental(
+            for: pitch.number,
+            semitoneRepresentation: semitoneRepresentation)
 
-        self.init(
-            name: Note.Name(
-                letter: Note.Letter(number: number)!,
-                accidental: accidental),
-            octave: Octave(octave)!)
+        self.name = Note.Name(letter: letter, accidental: accidental)
+        self.octave = Octave(pitch.number)
     }
 }
 
 extension Note.Letter {
-    public var number: Int {
+    public init(
+        for number: MIDI.Number,
+        semitoneRepresentation: SemitoneRepresentation = .default)
+    {
+        let index = number.value % Octave.semitonesCount
+        switch number.isFlat {
+        case true:
+            switch semitoneRepresentation {
+            case .sharp: self = Note.Letter(index - 1)
+            case .flat: self = Note.Letter(index + 1)
+            }
+        case false:
+            self = Note.Letter(index)
+        }
+    }
+}
+
+extension Note.Accidental {
+    public init(
+        for number: MIDI.Number,
+        semitoneRepresentation: SemitoneRepresentation = .default)
+    {
+        switch number.isFlat {
+        case true:
+            switch semitoneRepresentation {
+            case .sharp: self = .sharp
+            case .flat: self = .flat
+            }
+        case false:
+            self = .natural
+        }
+    }
+}
+
+extension MIDI.Number {
+    var isFlat: Bool {
+        switch value % Octave.semitonesCount {
+        case 1,3,6,8,10: return true
+        default: return false
+        }
+    }
+}
+
+extension Note.Letter {
+    fileprivate var number: Int {
         switch self {
         case .c: return 0
         case .d: return 2
@@ -97,11 +126,8 @@ extension Note.Letter {
         }
     }
 
-    public init?(number: Int) {
-        guard number >= 0 && number < 12 else {
-            return nil
-        }
-
+    fileprivate init(_ number: Int) {
+        assert(number >= 0 && number < 12)
         switch number {
         case 0: self = .c
         case 2: self = .d

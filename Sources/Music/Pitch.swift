@@ -1,6 +1,6 @@
 import Platform
 
-public struct Pitch {
+public struct Pitch: Equatable {
     public var number: MIDI.Number
     public var offset: Cents
 

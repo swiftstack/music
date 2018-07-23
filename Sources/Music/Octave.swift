@@ -20,12 +20,13 @@ public enum Octave: Int {
 }
 
 extension Octave {
-    init?(_ number: Int) {
-        self.init(rawValue: number)
+    internal init(_ number: Int) {
+        assert(number >= -1 && number <= 9)
+        self.init(rawValue: number)!
     }
 
-    init(_ number: MIDI.Number) {
-        self.init(number.value / Octave.semitonesCount - 1)!
+    public init(_ number: MIDI.Number) {
+        self.init(number.value / Octave.semitonesCount - 1)
     }
 }
 
