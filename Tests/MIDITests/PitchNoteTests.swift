@@ -1,7 +1,7 @@
 import Test
-@testable import Music
+@testable import MIDI
 
-final class ConvertionTests: TestCase {
+final class PitchNoteTests: TestCase {
     func testNoteFromPitchNatural() {
         let pitch = Pitch(number: 69)
         let note = Note.Pitch(from: pitch)

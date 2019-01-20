@@ -1,4 +1,4 @@
-import Platform
+import Music
 
 public struct Pitch: Equatable {
     public var number: MIDI.Number

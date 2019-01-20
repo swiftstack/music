@@ -5,6 +5,7 @@ let package = Package(
     name: "Music",
     products: [
         .library(name: "Music", targets: ["Music"]),
+        .library(name: "MIDI", targets: ["MIDI"]),
     ],
     dependencies: [
         .package(
@@ -16,10 +17,16 @@ let package = Package(
     ],
     targets: [
         .target(
+            name: "MIDI",
+            dependencies: ["Music"]),
+        .target(
             name: "Music",
             dependencies: ["Platform"]),
         .testTarget(
             name: "MusicTests",
-            dependencies: ["Test", "Music"]),
+            dependencies: ["Test", "Music", "Audio"]),
+        .testTarget(
+            name: "MIDITests",
+            dependencies: ["Test", "MIDI"]),
     ]
 )

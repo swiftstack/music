@@ -1,7 +1,7 @@
 import Test
-@testable import Music
+@testable import MIDI
 
-final class CalculationsTests: TestCase {
+final class FrequencyTests: TestCase {
     func testFromFrequency() {
         assertEqual(Pitch(from: 880.0).debugDescription, "A5+0.0")
         assertEqual(Pitch(from: 174.61411571650194).debugDescription, "F3+0.0")

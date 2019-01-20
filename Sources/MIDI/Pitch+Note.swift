@@ -1,3 +1,5 @@
+import Music
+
 extension Pitch {
     public var note: Note.Pitch {
         return Note.Pitch(from: self)
@@ -101,6 +103,12 @@ extension Note.Accidental {
         case false:
             self = .natural
         }
+    }
+}
+
+extension Octave {
+    public init(_ number: MIDI.Number) {
+        self = Octave(number.value / Octave.semitonesCount - 1)!
     }
 }
 

@@ -1,5 +1,5 @@
 import Test
-@testable import Music
+@testable import MIDI
 
 final class PitchTests: TestCase {
     func testPitch() {

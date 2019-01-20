@@ -1,3 +1,4 @@
+import Music
 import Platform
 
 extension Pitch {
