@@ -48,7 +48,13 @@ extension Pitch: CustomStringConvertible {
     public var description: String {
         let plus = offset.value >= 0.0 ? "+" : ""
         let integer = Int(offset.value)
-        let fract = Int(abs(offset.value) * 100) % 100
+        return "\(Note.Pitch(from: self))\(plus)\(integer)"
+    }
+
+    public var debugDescription: String {
+        let plus = offset.value >= 0.0 ? "+" : ""
+        let integer = Int(offset.value)
+        let fract = Int(Swift.abs(offset.value) * 100) % 100
         return "\(Note.Pitch(from: self))\(plus)\(integer).\(fract)"
     }
 }

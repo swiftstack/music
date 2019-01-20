@@ -3,8 +3,8 @@ import Test
 
 final class CalculationsTests: TestCase {
     func testFromFrequency() {
-        assertEqual(Pitch(from: 880.0).description, "A5+0.0")
-        assertEqual(Pitch(from: 174.61411571650194).description, "F3+0.0")
+        assertEqual(Pitch(from: 880.0).debugDescription, "A5+0.0")
+        assertEqual(Pitch(from: 174.61411571650194).debugDescription, "F3+0.0")
     }
 
     func testToFrequency() {
@@ -20,9 +20,9 @@ final class CalculationsTests: TestCase {
         #else
         assertEqual(Pitch(from: 444.0).offset, 15.66738339053554)
         #endif
-        assertEqual(Pitch(from: 444.0).description, "A4+15.66")
+        assertEqual(Pitch(from: 444.0).debugDescription, "A4+15.66")
 
         assertEqual(Pitch(from: 439.0).offset, -3.939100787161778)
-        assertEqual(Pitch(from: 439.0).description, "A4-3.93")
+        assertEqual(Pitch(from: 439.0).debugDescription, "A4-3.93")
     }
 }
