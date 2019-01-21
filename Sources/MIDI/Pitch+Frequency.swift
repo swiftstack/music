@@ -1,5 +1,5 @@
+import Math
 import Music
-import Platform
 
 extension Pitch {
     public struct Frequency: Equatable {
@@ -24,15 +24,15 @@ extension Pitch {
         let semitones = Double(Octave.semitonesCount)
         let steps = number.value - MIDI.Number.standart.value
         let power = Double(steps) / Double(semitones)
-        return Frequency(pow(2, power) * Frequency.standart)!
+        return Frequency(exp2(power) * Frequency.standart)!
     }
 
     public init(from frequency: Frequency) {
         let semitones = Double(Octave.semitonesCount)
         let standart = Frequency.standart
-        let steps = Int(round(semitones * log2(frequency.value / standart)))
+        let steps = (semitones * log2(frequency.value / standart)).rounded()
         precondition(steps >= -69 && steps <= 58)
-        self.init(halfStepsFromStandard: steps)!
+        self.init(halfStepsFromStandard: Int(steps))!
         if (self.frequency != frequency) {
             self.offset = self.frequency.interval(to: frequency)
         }

@@ -9,7 +9,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/swift-stack/platform.git",
+            url: "https://github.com/swift-stack/math.git",
             .branch("master")),
         .package(
             url: "https://github.com/swift-stack/test.git",
@@ -17,11 +17,11 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "MIDI",
-            dependencies: ["Music"]),
-        .target(
             name: "Music",
-            dependencies: ["Platform"]),
+            dependencies: []),
+        .target(
+            name: "MIDI",
+            dependencies: ["Math", "Music"]),
         .testTarget(
             name: "MusicTests",
             dependencies: ["Test", "Music", "Audio"]),
