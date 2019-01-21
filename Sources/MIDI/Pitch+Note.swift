@@ -66,8 +66,9 @@ extension Note.Pitch {
             for: pitch.number,
             semitoneRepresentation: semitoneRepresentation)
 
-        self.name = Note.Name(letter: letter, accidental: accidental)
-        self.octave = Octave(pitch.number)
+        self.init(
+            name: .init(letter: letter, accidental: accidental),
+            octave: .init(pitch.number))
     }
 }
 
