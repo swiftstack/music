@@ -66,7 +66,7 @@ extension Package.Dependency {
     enum Source: String {
         case local, swiftcore, github
 
-        static var `default`: Self { .local }
+        static var `default`: Self { .github }
 
         var baseUrl: String {
             switch self {
