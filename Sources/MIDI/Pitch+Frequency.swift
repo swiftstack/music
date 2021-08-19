@@ -1,4 +1,3 @@
-import Math
 import Music
 
 extension Pitch {
@@ -24,13 +23,13 @@ extension Pitch {
         let semitones = Double(Octave.semitonesCount)
         let steps = number.value - MIDI.Number.standart.value
         let power = Double(steps) / Double(semitones)
-        return Frequency(exp2(power) * Frequency.standart)!
+        return Frequency(_exp2(power) * Frequency.standart)!
     }
 
     public init(from frequency: Frequency) {
         let semitones = Double(Octave.semitonesCount)
         let standart = Frequency.standart
-        let steps = (semitones * log2(frequency.value / standart)).rounded()
+        let steps = (semitones * _log2(frequency.value / standart)).rounded()
         precondition(steps >= -69 && steps <= 58)
         self.init(halfStepsFromStandard: Int(steps))!
         if (self.frequency != frequency) {
@@ -48,7 +47,7 @@ extension Pitch.Frequency {
         _ frequency1: Pitch.Frequency,
         _ frequency2: Pitch.Frequency) -> Pitch.Cents
     {
-        return Pitch.Cents(1200.0 * log2(frequency2.value / frequency1.value))
+        return Pitch.Cents(1200.0 * _log2(frequency2.value / frequency1.value))
     }
 }
 
