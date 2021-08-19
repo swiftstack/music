@@ -21,14 +21,38 @@ let package = Package(
         .target(
             name: "MIDI",
             dependencies: ["Music"]),
-        .testTarget(
-            name: "MusicTests",
-            dependencies: ["Test", "Music", "Audio"]),
-        .testTarget(
-            name: "MIDITests",
-            dependencies: ["Test", "MIDI"]),
     ]
 )
+
+// MARK: - tests
+
+testTarget("MIDI") { test in
+    test("Frequency")
+    test("MIDI")
+    test("Pitch")
+    test("PitchNote")
+}
+
+testTarget("Music") { test in
+    test("Note")
+    test("Octave")
+}
+
+func testTarget(_ target: String, task: ((String) -> Void) -> Void) {
+    task { test in addTest(target: target, name: test) }
+}
+
+func addTest(target: String, name: String) {
+    package.targets.append(
+        .executableTarget(
+            name: "Tests/\(target)/\(name)",
+            dependencies: ["Test", "MIDI", "Music"],
+            path: "Tests/\(target)/\(name)",
+            swiftSettings: [
+                .unsafeFlags(["-Xfrontend", "-disable-availability-checking"]),
+                .unsafeFlags(["-Xfrontend", "-enable-experimental-concurrency"])
+            ]))
+}
 
 // MARK: - custom package source
 

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+swift build
+
+export DYLD_LIBRARY_PATH=/Library/Developer/Toolchains/swift-latest.xctoolchain/usr/lib/swift/macosx
+
+.build/debug/Tests/MIDI/Frequency
+.build/debug/Tests/MIDI/MIDI
+.build/debug/Tests/MIDI/Pitch
+.build/debug/Tests/MIDI/PitchNote
+
+.build/debug/Tests/Music/Note
+.build/debug/Tests/Music/Octave
