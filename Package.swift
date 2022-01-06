@@ -12,7 +12,7 @@ let package = Package(
             targets: ["MIDI"]),
     ],
     dependencies: [
-        .package(name: "Test")
+        .package(name: "Test"),
     ],
     targets: [
         .target(
