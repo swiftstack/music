@@ -32,7 +32,7 @@ extension Pitch {
         let steps = (semitones * _log2(frequency.value / standart)).rounded()
         precondition(steps >= -69 && steps <= 58)
         self.init(halfStepsFromStandard: Int(steps))!
-        if (self.frequency != frequency) {
+        if self.frequency != frequency {
             self.offset = self.frequency.interval(to: frequency)
         }
     }
@@ -45,8 +45,8 @@ extension Pitch.Frequency {
 
     public static func interval(
         _ frequency1: Pitch.Frequency,
-        _ frequency2: Pitch.Frequency) -> Pitch.Cents
-    {
+        _ frequency2: Pitch.Frequency
+    ) -> Pitch.Cents {
         return Pitch.Cents(1200.0 * _log2(frequency2.value / frequency1.value))
     }
 }

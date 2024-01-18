@@ -8,8 +8,8 @@ public struct Note {
 
         public init(
             name: Name,
-            octave: Octave = .default)
-        {
+            octave: Octave = .default
+        ) {
             self.name = name
             self.octave = octave
         }
@@ -79,8 +79,8 @@ extension Note {
     public init(
         name: Name,
         octave: Octave = .default,
-        duration: Duration = .default)
-    {
+        duration: Duration = .default
+    ) {
         self.init(
             pitch: Pitch(
                 name: name,
@@ -92,8 +92,8 @@ extension Note {
         letter: Letter,
         accidental: Accidental = .default,
         octave: Octave = .default,
-        duration: Duration = .default)
-    {
+        duration: Duration = .default
+    ) {
         self.init(
             pitch: Pitch(
                 name: Name(letter: letter, accidental: accidental),

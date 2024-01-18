@@ -9,8 +9,8 @@ extension Pitch {
         letter: Note.Letter,
         accidental: Note.Accidental = .default,
         octave: Octave = .default,
-        offset: Cents = .default)
-    {
+        offset: Cents = .default
+    ) {
         let base = Octave.semitonesCount * (octave.rawValue + 1)
         var rawNumber = base + letter.number
         switch accidental {
@@ -28,8 +28,8 @@ extension Pitch {
     public init?(
         name: Note.Name,
         octave: Octave = .default,
-        offset: Cents = .default)
-    {
+        offset: Cents = .default
+    ) {
         self.init(
             letter: name.letter,
             accidental: name.accidental,
@@ -39,8 +39,8 @@ extension Pitch {
 
     public init?(
         pitch: Note.Pitch,
-        offset: Cents = .default)
-    {
+        offset: Cents = .default
+    ) {
         self.init(
             name: pitch.name,
             octave: pitch.octave,
@@ -56,8 +56,8 @@ public enum SemitoneRepresentation {
 extension Note.Pitch {
     public init(
         from pitch: Pitch,
-        semitoneRepresentation: SemitoneRepresentation = .default)
-    {
+        semitoneRepresentation: SemitoneRepresentation = .default
+    ) {
         let letter = Note.Letter(
             for: pitch.number,
             semitoneRepresentation: semitoneRepresentation)
@@ -75,8 +75,8 @@ extension Note.Pitch {
 extension Note.Letter {
     public init(
         for number: MIDI.Number,
-        semitoneRepresentation: SemitoneRepresentation = .default)
-    {
+        semitoneRepresentation: SemitoneRepresentation = .default
+    ) {
         let index = number.value % Octave.semitonesCount
         switch number.isFlat {
         case true:
@@ -93,8 +93,8 @@ extension Note.Letter {
 extension Note.Accidental {
     public init(
         for number: MIDI.Number,
-        semitoneRepresentation: SemitoneRepresentation = .default)
-    {
+        semitoneRepresentation: SemitoneRepresentation = .default
+    ) {
         switch number.isFlat {
         case true:
             switch semitoneRepresentation {
@@ -116,7 +116,7 @@ extension Octave {
 extension MIDI.Number {
     var isFlat: Bool {
         switch value % Octave.semitonesCount {
-        case 1,3,6,8,10: return true
+        case 1, 3, 6, 8, 10: return true
         default: return false
         }
     }
