@@ -20,14 +20,25 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Music"),
+            name: "Music",
+            swiftSettings: swift6),
         .target(
             name: "MIDI",
             dependencies: [
                 .target(name: "Music")
-            ]),
+            ],
+            swiftSettings: swift6),
     ]
 )
+
+let swift6: [SwiftSetting] = [
+    .enableUpcomingFeature("ConciseMagicFile"),
+    .enableUpcomingFeature("ForwardTrailingClosures"),
+    .enableUpcomingFeature("ExistentialAny"),
+    .enableUpcomingFeature("StrictConcurrency"),
+    .enableUpcomingFeature("ImplicitOpenExistentials"),
+    .enableUpcomingFeature("BareSlashRegexLiterals"),
+]
 
 // MARK: - tests
 
@@ -56,7 +67,8 @@ func addTest(target: String, name: String) {
                 .target(name: "MIDI"),
                 .product(name: "Test", package: "test"),
             ],
-            path: "Tests/\(target)/\(name)"))
+            path: "Tests/\(target)/\(name)",
+            swiftSettings: swift6))
 }
 
 // MARK: - custom package source
