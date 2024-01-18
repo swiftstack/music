@@ -1,20 +1,20 @@
 import Test
 @testable import Music
 
-test.case("note name") {
+test("note name") {
     let name = Note.Name(letter: .a, accidental: .natural)
     expect(name.letter == .a)
     expect(name.accidental == .natural)
 }
 
-test.case("note pitch") {
+test("note pitch") {
     let pitch = Note.Pitch(name: .a, octave: .four)
     expect(pitch.name.letter == .a)
     expect(pitch.name.accidental == .natural)
     expect(pitch.octave == .four)
 }
 
-test.case("note pitch description") {
+test("note pitch description") {
     let a4 = Note.Pitch(name: .a, octave: .four)
     expect(a4.description == "A4")
 
@@ -22,13 +22,13 @@ test.case("note pitch description") {
     expect(gSharp4.description == "G#3")
 }
 
-test.case("note") {
+test("note") {
     let note = Note(name: .a, octave: .four)
     expect(note.pitch.name.letter == .a)
     expect(note.pitch.octave == .four)
 }
 
-test.case("note description") {
+test("note description") {
     let a4 = Note(letter: .a, octave: .four)
     expect(a4.description == "A4")
 
@@ -36,4 +36,4 @@ test.case("note description") {
     expect(gSharp4.description == "G#3")
 }
 
-test.run()
+await run()

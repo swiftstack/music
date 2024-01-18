@@ -1,7 +1,7 @@
 import Test
 @testable import Music
 
-test.case("octave") {
+test("octave") {
     expect(Octave(-1) == .minusOne)
     expect(Octave(0) == .zero)
     expect(Octave(1) == .one)
@@ -17,4 +17,4 @@ test.case("octave") {
     expect(Octave(10) == nil)
 }
 
-test.run()
+await run()

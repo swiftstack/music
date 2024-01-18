@@ -1,12 +1,12 @@
 import Test
 @testable import MIDI
 
-test.case("pitch") {
+test("pitch") {
     let pitch = Pitch(number: 69)
     expect(pitch.number == 69)
 }
 
-test.case("pitch description") {
+test("pitch description") {
     let a4 = Pitch(number: 69)
     expect(a4.description == "A4+0")
     expect(a4.debugDescription == "A4+0.0")
@@ -16,7 +16,7 @@ test.case("pitch description") {
     expect(gSharp4.debugDescription == "G#4+1.34")
 }
 
-test.case("pitch from note") {
+test("pitch from note") {
     let pitch = Pitch(
         letter: .a,
         accidental: .flat,
@@ -26,4 +26,4 @@ test.case("pitch from note") {
     expect(pitch?.number == 68)
 }
 
-test.run()
+await run()
