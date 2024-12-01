@@ -15,9 +15,6 @@ let package = Package(
             name: "MIDI",
             targets: ["MIDI"]),
     ],
-    dependencies: [
-        .package(name: "Test"),
-    ],
     targets: [
         .target(
             name: "Music",
@@ -26,6 +23,13 @@ let package = Package(
             name: "MIDI",
             dependencies: [
                 .target(name: "Music")
+            ],
+            swiftSettings: swift6),
+        .testTarget(
+            name: "Tests",
+            dependencies: [
+                .target(name: "Music"),
+                .target(name: "MIDI"),
             ],
             swiftSettings: swift6),
     ]
@@ -39,37 +43,6 @@ let swift6: [SwiftSetting] = [
     .enableUpcomingFeature("ImplicitOpenExistentials"),
     .enableUpcomingFeature("BareSlashRegexLiterals"),
 ]
-
-// MARK: - tests
-
-testTarget("MIDI") { test in
-    test("Frequency")
-    test("MIDI")
-    test("Pitch")
-    test("PitchNote")
-}
-
-testTarget("Music") { test in
-    test("Note")
-    test("Octave")
-}
-
-func testTarget(_ target: String, task: ((String) -> Void) -> Void) {
-    task { test in addTest(target: target, name: test) }
-}
-
-func addTest(target: String, name: String) {
-    package.targets.append(
-        .executableTarget(
-            name: "Tests/\(target)/\(name)",
-            dependencies: [
-                .target(name: "Music"),
-                .target(name: "MIDI"),
-                .product(name: "Test", package: "test"),
-            ],
-            path: "Tests/\(target)/\(name)",
-            swiftSettings: swift6))
-}
 
 // MARK: - custom package source
 
