@@ -1,4 +1,4 @@
-public enum Octave: Int {
+public enum Octave: Int, Sendable {
     case minusOne = -1
     case zero = 0
     case one

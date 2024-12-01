@@ -1,6 +1,6 @@
 import Music
 
-public struct Pitch: Equatable {
+public struct Pitch: Equatable, Sendable {
     public var number: MIDI.Number
     public var offset: Cents
 
@@ -9,7 +9,7 @@ public struct Pitch: Equatable {
         self.offset = offset
     }
 
-    public struct Cents: Equatable {
+    public struct Cents: Equatable, Sendable {
         public var value: Double
 
         public init(_ value: Double) {

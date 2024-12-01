@@ -1,7 +1,7 @@
 import Music
 
 extension Pitch {
-    public struct Frequency: Equatable {
+    public struct Frequency: Equatable, Sendable {
         public var value: Double
 
         public init?(_ value: Double) {
@@ -11,7 +11,7 @@ extension Pitch {
             self.value = value
         }
 
-        public static var standart: Double = 440.0
+        public static let standart: Double = 440.0
 
         public static let min: Double = 8.175798915643707
         public static let max: Double = 12543.853951415975

@@ -1,8 +1,8 @@
-public struct Note {
+public struct Note: Sendable {
     public let pitch: Pitch
     public let duration: Duration
 
-    public struct Pitch {
+    public struct Pitch: Sendable {
         public var name: Name
         public var octave: Octave
 
@@ -15,7 +15,7 @@ public struct Note {
         }
     }
 
-    public struct Name {
+    public struct Name: Sendable {
         public var letter: Letter
         public var accidental: Accidental
 
@@ -25,7 +25,7 @@ public struct Note {
         }
     }
 
-    public enum Letter: String {
+    public enum Letter: String, Sendable {
         case c = "C"
         case d = "D"
         case e = "E"
@@ -35,7 +35,7 @@ public struct Note {
         case b = "B"
     }
 
-    public enum Accidental {
+    public enum Accidental: Sendable {
         case sharp
         case flat
         case natural
@@ -43,13 +43,13 @@ public struct Note {
         public static let `default`: Accidental = .natural
     }
 
-    public struct Duration {
+    public struct Duration: Sendable {
         public let size: Size
         public let dots: Dots
 
         public static let `default` = Duration(size: .whole, dots: .none)
 
-        public enum Size {
+        public enum Size: Sendable {
             case large
             case long
             case doubleWhole
@@ -64,7 +64,7 @@ public struct Note {
             case twoHundredFiftySixth
         }
 
-        public enum Dots: String {
+        public enum Dots: String, Sendable {
             case none, one, two, three
         }
     }

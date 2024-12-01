@@ -1,7 +1,7 @@
 @_exported import Music
 
 public enum MIDI {
-    public struct Number: Equatable {
+    public struct Number: Equatable, Sendable {
         public var value: Int
 
         public static let min: Number = 0

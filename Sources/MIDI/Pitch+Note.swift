@@ -48,7 +48,7 @@ extension Pitch {
     }
 }
 
-public enum SemitoneRepresentation {
+public enum SemitoneRepresentation: Sendable {
     case sharp, flat
     public static let `default`: SemitoneRepresentation = .sharp
 }
