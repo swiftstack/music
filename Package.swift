@@ -17,11 +17,17 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "Music"),
+            name: "Music",
+            swiftSettings: [
+                .treatWarning("EmbeddedRestrictions", as: .error)
+            ]),
         .target(
             name: "MIDI",
             dependencies: [
                 .target(name: "Music")
+            ],
+            swiftSettings: [
+                .treatWarning("EmbeddedRestrictions", as: .error)
             ]),
         .testTarget(
             name: "Tests",
